@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display </title>
+    <script>
+        function f1()
+        {
+    const params=new URLSearchParams(window.location.search);
+        var names=params.get("n").split(',');
+        var pics=params.get("pc").split(',');
+        var price=params.get("pr").split(',');
+        //  bind table into html table
+      var tab="<table>";
+        tab=tab+"<table border='1' width='100%'><tr><th>Sr. no</th><th>Procuts Name</th><th>Price</th><th>Products Picture</th></tr>";
+         for(var j=0;j<names.length;j++)
+         {
+             tab=tab+"<tr><td>"+(j+1)+"</td><td>"+names[j]+"</td><td>"+price[j]+"</td></td><td><img src='"+pics[j]+"' height='60px' width='80px'/></td></tr>";
+         }
+         tab=tab+"</table>";
+         //alert(tab);
+         document.getElementById('d1').innerHTML=tab;
+         
+        }
+
+    </script>
+</head>
+<body onload="f1()">
+    <h1>Your ordered products list following here</h1>
+    <div id="d1"></div>
+    
+</body>
+</html>

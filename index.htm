@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Portal</title>
+    <style>
+        #outer {
+            height: auto;
+            width: 95%;
+            margin: 0px auto;
+        }
+
+        #head {
+            width: 100%;
+            height: 50px;
+            background-color: yellowgreen;
+            font-size: 45px;
+            color: white;
+            padding: 5px;
+            text-shadow: 3px 4px 5px red;
+        }
+
+        #slider {
+            width: 100%;
+            height: 450px;
+            border: 2px solid yellowgreen;
+            margin-top: 10px;
+        }
+
+        #main {
+            width: 100%;
+            min-height: 1100px;
+            height: auto;
+        }
+
+        #footer {
+            width: 100%;
+            height: 50px;
+            background-color: black;
+        }
+
+        .dd {
+            width: 22%;
+            height: 310px;
+            border: 1px solid yellowgreen;
+            margin: 10px;
+            float: left;
+        }
+    </style>
+    <script>
+        // slider code start here... 
+        var arr = ["1.jpg", "2.jpg", "4.jpg"];
+        var i = 0;
+        function slider() {
+            document.getElementById("m1").src = arr[i];
+            i++;
+            if (i == arr.length) {
+                i = 0;
+            }
+            window.setTimeout("slider()", 1000);
+        }
+        // slider code end here...
+
+        //Add cart here ...
+        var p = 0;
+        // declare of an array.
+        arrn = [];
+        arrp = [];
+        arrpic = [];
+        // end here..
+        function f1(x) {
+            var btn = x.innerText.trim();
+            // alert(btn);
+            if (btn == "ADD TO CART") {
+                x.innerText = "REMOVE TO CART";
+                x.style.backgroundColor = "red";
+                p++;
+                // store values into an array
+                var b = x.id;
+                //alert(b);
+                var n = b.substr(b.lastIndexOf('b') + 1);
+                //alert(n);
+                var name = document.getElementById("n" + n).innerText;
+                var pics = document.getElementById("img" + n).src;
+                var price = document.getElementById("p" + n).innerText;
+                //alert(name);
+                arrn.push(name);
+                arrpic.push(pics);
+                arrp.push(price);
+                //alert(arrn.length);
+            }
+            else {
+                x.innerText = "ADD TO CART";
+                x.style.backgroundColor = "yellowgreen";
+                p--;
+                // store values into an array
+                var b = x.id;
+                //alert(b);
+                var n = b.substr(b.lastIndexOf('b') + 1);
+                //alert(n);
+                var name = document.getElementById("n" + n).innerText;
+                var pics = document.getElementById("img" + n).src;
+                var price = document.getElementById("p" + n).innerText;
+
+                // delete products from an array;
+                var i1 = arrn.indexOf(name);
+                var i2 = arrp.indexOf(price);
+                var i3 = arrpic.indexOf(pics);
+                if (i1 != -1 && i2 != -1 && i3 != -1) {
+                    arrn.splice(i1, 1);
+                    arrp.splice(i2, 1);
+                    arrpic.splice(i3, 1);
+                }
+
+            }
+            document.getElementById("sp").innerText = p;
+        }
+        // Add cart end here...
+        // display products of cart
+        function f2() {
+
+            var n = document.getElementById("sp").innerText;
+            if (n == "0") {
+                alert("Cart is Empty,Please Add products into cart");
+            }
+            else {
+                window.location.href = "display.htm?n=" + arrn + "&pr=" + arrp + "&pc=" + arrpic + "";
+            }
+        }
+    // End display products of cart
+    </script>
+</head>
+
+<body onload="slider()">
+    <div id="outer">
+        <div id="head"> OUR E-COMMERCE PORTAL
+            <img src="cart.jpg" onclick="f2()" height="50px" width="60px"
+                style="float:right;background:white;padding: 5px;" />
+            <span id="sp" style="position:absolute;right: 5%;color:rgb(241, 27, 27);font-size: 20px;">0</span>
+        </div>
+        <div id="slider">
+            <img src="1.jpg" height="450" width="100%" id="m1" />
+        </div>
+        <div id="main">
+            <h1 style="text-align: center;">Our Products First of all Add into Cart then Make Payment</h1>
+            <div class="dd">
+                <span id="p1" style="background:yellowgreen;color: white;font-size: 22px;padding: 10px;">499</span>
+                <img src="earphone.jpg" height="200px" width="100%" id="img1" />
+                <center><span id="n1" style="font-size: 35px;color:red;text-align: center;">Earphone</span></center>
+                <button onclick="f1(this)" id="b1"
+                    style="color:white;background-color:yellowgreen;font: size 22px;text-align:center;width: 100%;height: 40px;">ADD
+                    TO CART</button>
+            </div>
+            <div class="dd">
+                <span id="p2" style="background:yellowgreen;color: white;font-size: 22px;padding: 10px;">399</span>
+                <img src="watch.jpg" height="200px" width="100%" id="img2" />
+                <center><span id="n2" style="font-size: 35px;color:red;text-align: center;">Watch</span></center>
+                <button id="b2" onclick="f1(this)" id="b2"
+                    style="color:white;background-color:yellowgreen;font: size 22px;text-align:center;width: 100%;height: 40px;">ADD
+                    TO CART</button>
+            </div>
+
+            <div class="dd">
+                <span id="p3" style="background:yellowgreen;color: white;font-size: 22px;padding: 10px;">750</span>
+                <img src="shoes1.jpg" height="200px" width="100%" id="img3" />
+                <center><span id="n3" style="font-size: 35px;color:red;text-align: center;">Shoes</span></center>
+                <button id="b3" onclick="f1(this)"
+                    style="color:white;background-color:yellowgreen;font: size 22px;text-align:center;width: 100%;height: 40px;">ADD
+                    TO CART</button>
+            </div>
+            <div class="dd">
+                <span id="p4" style="background:yellowgreen;color: white;font-size: 22px;padding: 10px;">37999</span>
+                <img src="laptop.jpg" height="200px" width="100%" id="img4" />
+                <center><span id="n4" style="font-size: 35px;color:red;text-align: center;">HP Laptop</span></center>
+                <button id="b4" onclick="f1(this)"
+                    style="color:white;background-color:yellowgreen;font: size 22px;text-align:center;width: 100%;height: 40px;">ADD
+                    TO CART</button>
+            </div>
+            <div class="dd">
+                <span id="p5" style="background:yellowgreen;color: white;font-size: 22px;padding: 10px;">99</span>
+                <img src="buck.jpg" height="200px" width="100%" id="img5" />
+                <center><span id="n5" style="font-size: 35px;color:red;text-align: center;">Bucket</span></center>
+                <button id="b5" onclick="f1(this)"
+                    style="color:white;background-color:yellowgreen;font: size 22px;text-align:center;width: 100%;height: 40px;">ADD
+                    TO CART</button>
+            </div>
+            <div class="dd">
+                <span id="p6" style="background:yellowgreen;color: white;font-size: 22px;padding: 10px;">600</span>
+                <img src="bottel.jpg" height="200px" width="100%" id="img6" />
+                <center><span id="n6" style="font-size: 35px;color:red;text-align: center;">Bottle</span></center>
+                <button id="b6" onclick="f1(this)"
+                    style="color:white;background-color:yellowgreen;font: size 22px;text-align:center;width: 100%;height: 40px;">ADD
+                    TO CART</button>
+            </div>
+            <div class="dd">
+                <span id="p7" style="background:yellowgreen;color: white;font-size: 22px;padding: 10px;">100</span>
+                <img src="horliks.jpeg" height="200px" width="100%" id="img7" />
+                <center><span id="n7" style="font-size: 35px;color:red;text-align: center;">horliks</span></center>
+                <button id="b7" onclick="f1(this)"
+                    style="color:white;background-color:yellowgreen;font: size 22px;text-align:center;width: 100%;height: 40px;">ADD
+                    TO CART</button>
+            </div>
+            <div class="dd">
+                <span id="p8" style="background:yellowgreen;color: white;font-size: 22px;padding: 10px;">999</span>
+                <img src="ghee.jpeg" height="200px" width="100%" id="img8" />
+                <center><span id="n8" style="font-size: 35px;color:red;text-align: center;">Ghee</span></center>
+                <button id="b8" onclick="f1(this)"
+                    style="color:white;background-color:yellowgreen;font: size 22px;text-align:center;width: 100%;height: 40px;">ADD
+                    TO CART</button>
+            </div>
+            <div class="dd">
+                <span id="p9" onclick="f1(this)"
+                    style="background:yellowgreen;color: white;font-size: 22px;padding: 10px;">299</span>
+                <img src="glass.jpeg" height="200px" width="100%" id="img9" />
+                <center><span id="n9" style="font-size: 35px;color:red;text-align: center;">Glass</span></center>
+                <button id="b9" onclick="f1(this)"
+                    style="color:white;background-color:yellowgreen;font: size 22px;text-align:center;width: 100%;height: 40px;">ADD
+                    TO CART</button>
+            </div>
+            <div class="dd">
+                <span id="p10" style="background:yellowgreen;color: white;font-size: 22px;padding: 10px;">299</span>
+                <img src="htmlbook.jpg" height="200px" width="100%" id="img10" />
+                <center><span id="n10" style="font-size: 35px;color:red;text-align: center;">HTML Book</span></center>
+                <button id="b10" onclick="f1(this)"
+                    style="color:white;background-color:yellowgreen;font: size 22px;text-align:center;width: 100%;height: 40px;">ADD
+                    TO CART</button>
+            </div>
+            <div class="dd">
+                <span id="p11" style="background:yellowgreen;color: white;font-size: 22px;padding: 10px;">1300</span>
+                <img src="headphone.jpeg" height="200px" width="100%" id="img11" />
+                <center><span id="n11" style="font-size: 35px;color:red;text-align: center;">Headphone</span></center>
+                <button id="b11" onclick="f1(this)"
+                    style="color:white;background-color:yellowgreen;font: size 22px;text-align:center;width: 100%;height: 40px;">ADD
+                    TO CART</button>
+            </div>
+            <div class="dd">
+                <span id="p12" style="background:yellowgreen;color: white;font-size: 22px;padding: 10px;">100</span>
+                <img src="tea.jpeg" height="200px" width="100%" id="img12" />
+                <center><span id="n12" style="font-size: 35px;color:red;text-align: center;">Tea</span></center>
+                <button id="b12" onclick="f1(this)"
+                    style="color:white;background-color:yellowgreen;font: size 22px;text-align:center;width: 100%;height: 40px;">ADD
+                    TO CART</button>
+            </div>
+
+        </div>
+        <div id="footer"> </div>
+
+    </div>
+</body>
+
+</html>
